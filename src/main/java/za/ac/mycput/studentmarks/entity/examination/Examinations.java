@@ -59,6 +59,10 @@ public class Examinations {
                 '}';
     }
 
+    public int getExamId() {
+        return examId;
+    }
+
 
     public static class Builder{
         @Id

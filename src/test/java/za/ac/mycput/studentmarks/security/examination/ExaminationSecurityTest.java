@@ -1,4 +1,4 @@
 package za.ac.mycput.studentmarks.security.examination;
 
-public class ExaminationsSecurity{
+public class ExaminationSecurityTest {
 }
