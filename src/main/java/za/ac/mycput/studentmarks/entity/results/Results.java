@@ -1,79 +1,91 @@
 package za.ac.mycput.studentmarks.entity.results;
 
-/* User.java
-    Entity for the Results.
-    Author: Lwazi Tomson (218204493)
-    Date: 10 October 2021
- */
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.*;
 
 
-public class Results {
+@Entity
+@Table(name="results")
+    public class Results  {
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        @Column(name="results_id")
+        private int resultsId;
+       @Column(name="results_desc")
+        private String resultsDesc;
+        @Column(name="results_type")
+        private String resultsType;
+
+    public int getResultsId() {
+        return resultsId;
+    }
+
+    public String getResultsDesc() {
+        return resultsDesc;
+    }
+
+    public String getResultsType() {
+        return resultsType;
+    }
 
     private Results(){}
 
-    String resultId, resultDesc, resultType;
+        private Results(Builder builder){
+          this.resultsId = builder.resultsId;
+            this.resultsDesc = builder.resultsDesc;
+            this.resultsType = builder.resultsType;
 
-
-    public String getResultId() {
-        return resultId;
-    }
-
-    public String getResultDesc() {
-        return resultDesc;
-    }
-
-    public String getResultType() {
-        return resultType;
-    }
-
-
-
-    public Results(Builder builder) {
-        this.resultId = builder.resultId;
-        this.resultDesc = builder.resultDesc;
-        this.resultType = builder.resultType;
-
-    }
-
-    public static class Builder {
-
-        String resultId, resultDesc, resultType;
-
-        public Builder setResultId(String resultId) {
-            this.resultId = resultId;
-            return this;
         }
 
-        public Builder setResultDesc(String resultDesc) {
-            this.resultDesc = resultDesc;
-            return this;
+
+
+
+        @Override
+        public String toString() {
+            return "Results{" +
+                    "resultsId='" + resultsId + '\'' +
+                    ", resultsDesc='" + resultsDesc + '\'' +
+                    ", resultsType='" + resultsType + '\'' +
+                    '}';
         }
 
-        public Builder setResultType(String resultType) {
-            this.resultType = resultType;
-            return this;
-        }
+        public static class Builder {
+            @Id
+            @GeneratedValue(strategy = GenerationType.AUTO)
+            @Column(name="results_id")
+            private int resultsId;
+            @Column(name="results_desc")
+            private String resultsDesc;
+            @Column(name="results_type")
+            private String resultsType;
 
-        public Results build(){ return new Results(this);
-        }
+            public Builder resultsId(int resultId){
+                this.resultsId = resultsId;
+                return this;
+            }
 
-        public Builder copy(Results results){
-            this.resultId = results.resultId;
-            this.resultDesc= results.resultDesc;
-            this.resultType = results.resultType;
-            return this;
+            public Builder resultsDesc(String resultsDesc){
+                this.resultsDesc = resultsDesc;
+                return this;
+            }
+
+            public Builder resultsType(String resultsType){
+                this.resultsType = resultsType;
+                return this;
+            }
+
+
+            public Builder copy(Results results){
+                this.resultsId = results.resultsId;
+                this.resultsDesc = results.resultsDesc;
+                this.resultsType = results.resultsType;
+                return this;
+            }
+
+            public Results build(){ return new Results(this);
+            }
+
         }
     }
-
-    @Override
-    public String toString() {
-        return "Results{" +
-                "resultId='" + resultId + '\'' +
-                ", resultDesc='" + resultDesc + '\'' +
-                ", resultType='" + resultType + '\'' +
-                '}';
-    }
-
-
-}
 

@@ -1,6 +1,6 @@
 package za.ac.mycput.studentmarks.repository;
 
-@Deprecated
+//@Deprecated
 public interface IRepository<T, ID> {
 
     T create(T t);

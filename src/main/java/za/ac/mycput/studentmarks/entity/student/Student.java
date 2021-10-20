@@ -101,8 +101,8 @@ public class Student {
         }
 
         public Builder setStudentName(String studentName){
-         this.studentName= studentName;
-         return this;
+            this.studentName= studentName;
+            return this;
         }
         public Builder setStudentPhoneNumber(long studentPhoneNumber){
             this.studentPhoneNumber= studentPhoneNumber;
@@ -130,10 +130,10 @@ public class Student {
             this.studentPassword=student.studentPassword;
             this.studentAddress=student.studentAddress;
 
-         return this;
+            return this;
         }
         public Student build(){
-           return new Student(this);
+            return new Student(this);
         }
     }
 }

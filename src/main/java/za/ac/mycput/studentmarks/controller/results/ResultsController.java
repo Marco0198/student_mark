@@ -1,51 +1,37 @@
 package za.ac.mycput.studentmarks.controller.results;
 
-
-/*
-    Author: Lwazi Tomson (218204493)
-    Date: 10 October 2021
- */
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import za.ac.mycput.studentmarks.entity.results.Results;
-import za.ac.mycput.studentmarks.factory.results.ResultsFactory;
-import za.ac.mycput.studentmarks.service.results.impl.ResultsServiceImpl;
-
+import za.ac.mycput.studentmarks.service.results.ResultService;
+;
 import java.util.Set;
-
 @RestController
-@RequestMapping("/results")
 public class ResultsController {
-
     @Autowired
-    public ResultsServiceImpl resultsService;
+    private ResultService service;
+    @GetMapping("results/list")
+    public Set<Results> list(){
+        return  service.getAll();
+    }
 
-    @RequestMapping(value="/create", method= RequestMethod.POST)
+    @PostMapping("results/create")
+    @ResponseStatus(HttpStatus.CREATED)
     public Results create(@RequestBody Results results){
-        Results newResults = ResultsFactory.build(results.getResultId(),
-                results.getResultDesc(),
-                results.getResultType());
-
-        return resultsService.create(newResults);
+        return service.create(results);
     }
 
-    @GetMapping("/read{id}")
-    public Results read(@PathVariable String id){
-        return resultsService.read(id);
+    @DeleteMapping(value = "results/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable("id") int id) {
+        service.delete(id);
+    }
+    @PutMapping(value = "results/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@PathVariable( "id" ) int id, @RequestBody Results results) {
+
+        service.update(results);
     }
 
-    @PostMapping("/update")
-    public Results update(@RequestBody Results results){
-        return resultsService.update(results);
-    }
-
-    @PostMapping("/delete/{id}")
-    public boolean delete(@PathVariable String id){
-        return resultsService.delete(id);
-    }
-
-    @GetMapping("/getall")
-    public Set<Results> getAll(){
-        return resultsService.getAll();
-    }
 }
